@@ -1,0 +1,19 @@
+class Fruit :
+    def __init__(self,color,weight):
+        self.color = color
+        self.weight = weight
+class apple(Fruit):
+    pass
+class orange(Fruit):
+    pass
+class banana(Fruit):
+    pass
+x = apple("red",0.5)
+print(x.color,x.weight)
+def isfresh(x):
+    print(x)
+    if (x == "red"):
+        print("Fresh")
+    else:
+        print("Not fresh")
+isfresh(x.color)
