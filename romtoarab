@@ -1,0 +1,22 @@
+rzymskie = {
+    "I": 1,
+    "V": 5,
+    "X": 10,
+    "L": 50,
+    "C": 100,
+    "D": 500,
+    "M": 1000
+}
+def romtoab(liczba):
+    y = list(liczba)
+    wynik = rzymskie[y[0]]
+    odejmij = 0
+    for x in range(1,len(y)):
+        if(rzymskie[y[x]]<rzymskie[y[x-1]]):
+            wynik=wynik+rzymskie[y[x]]
+        elif(rzymskie[y[x]]>rzymskie[y[x-1]]):
+            odejmij=odejmij+2*rzymskie[y[x-1]]
+            wynik=wynik+rzymskie[y[x]]
+        elif(rzymskie[y[x]]==rzymskie[y[x-1]]):
+            wynik = wynik + rzymskie[y[x]]
+    print(wynik-odejmij)
