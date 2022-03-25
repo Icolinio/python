@@ -1,0 +1,22 @@
+tydzien = {
+    "Poniedzialek": "Monday",
+    "Wtorek": "Tuesday",
+    "Sroda": "Wednesday",
+    "Czwartek": "Thursday",
+    "Piatek": "Friday",
+    "Sobota": "Saturday",
+    "Niedziela": "Sunday"
+}
+tydzienang = {
+    "Monday": "Poniedzialek",
+    "Tuesday": "Wtorek",
+    "Wednesday": "Sroda",
+    "Thursday": "Czwartek",
+    "Friday": "Piatek",
+    "Saturday": "Sobota",
+    "Sunday": "Niedziela",
+}
+def pltoang(day):
+    print(tydzien[day])
+def angtopl(day):
+    print(tydzienang[day])
