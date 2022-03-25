@@ -1,0 +1,23 @@
+class Account:
+    def __init__(self,saldoP,saldoK,przelewW,przelewZ,wplata,wyplata):
+        self.saldoP = saldoP
+        self.saldoK = saldoK
+        self.przelewW = przelewW
+        self.przelewZ = przelewZ
+        self.wplata = wplata
+        self.wyplata = wyplata
+class PrivatAccount(Account):
+    def __init__(self,saldoP,saldoK,przelewW,przelewZ,wplata,wyplata,przelew,wynagrodzenia):
+        Account.__init__(self,saldoP,saldoK,przelewW,przelewZ,wplata,wyplata)
+        self.przelew = przelew
+        self.wynagrodzenia = wynagrodzenia
+class FirmAccount(Account):
+    def __init__(self,saldoP,saldoK,przelewW,przelewZ,wplata,wyplata,przelewZUS,przelewUS):
+        Account.__init__(self,saldoP,saldoK,przelewW,przelewZ,wplata,wyplata)
+        self.przelewZUS = przelewZUS
+        self.przelewUS = przelewUS
+
+x = FirmAccount(1000,20000,500,20,300,400,5,10)
+y = Account(5,200,20,100,50,300)
+z = Account(35000,55000,1000,500,20000,10000)
+print(x.przelewZUS)
