@@ -1,0 +1,104 @@
+#Muranova Anna
+#Zadanie 1
+
+def rom_to_ar(number):
+    romanian_numerals = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
+    n = 0
+    # 4 (IV) and 9 (IX), 40 (XL), 90 (XC), 400 (CD) and 900 (CM)
+    number = number.replace('IV', 'IIII')
+    number = number.replace('IX', 'VIIII')
+    number = number.replace('XL', 'XXXX')
+    number = number.replace('XC', 'LXXXX')
+    number = number.replace('CD', 'CCCC')
+    number = number.replace('CM', 'DCCCC')
+    for i in number:
+        n += romanian_numerals[i]
+    return n
+
+
+def ar_to_rom(n):
+    num = [1, 4, 5, 9, 10, 40, 50, 90,
+        100, 400, 500, 900, 1000]
+    sym = ["I", "IV", "V", "IX", "X", "XL",
+        "L", "XC", "C", "CD", "D", "CM", "M"]
+    i = 12
+    number = ''
+    while n:
+        div = n // num[i]
+        n %= num[i]
+
+        while div:
+            number += sym[i]
+            div -= 1
+        i -= 1
+    return number
+
+
+print('1984=', ar_to_rom(1984))
+print('MCMLXXXIV=', rom_to_ar('MCMLXXXIV'))
+
+
+#Zadanie 2
+class Romanian:
+    def __init__(self, a):
+        self.a = a
+
+    def __str__(self):
+        return str(self.a)
+
+    def __add__(self, s):
+        return ar_to_rom(rom_to_ar(self.a)+rom_to_ar(s.a))
+
+    def __sub__(self, s):
+        return ar_to_rom(rom_to_ar(self.a)-rom_to_ar(s.a))
+
+    def __mul__(self, s):
+        return ar_to_rom(rom_to_ar(self.a)*rom_to_ar(s.a))
+
+    def __len__(self):
+        return len(self.a)
+
+    def __getitem__(self, item):
+        return self.a[item]
+
+
+a = Romanian('MCMLXXXIV')
+b = Romanian('MXXIV')
+print(a-b)
+print(rom_to_ar(a-b))
+
+
+#Zadanie 3
+def Fib(n):
+    if n <= 1:
+        return n
+    else:
+        return Fib(n-1)+Fib(n-2)
+
+
+print(Fib(8))
+
+
+#Zadanie 4
+def func3(n):
+    s = 0
+    for i in range(1, n+1):
+        s += i**3
+    return s
+
+
+print(func3(3))
+
+
+#Zadanie 5
+my_str = "I study at the University of Warmia and Mazury in Olsztyn"
+print(my_str[::3])
+
+
+#Zadanie 6
+def func_mm(lista):
+    return min(lista), max(lista)
+
+
+print(func_mm([1, 4, -5, 7, 8]))
+print(type(func_mm([1, 4, -5, 7, 8])))
