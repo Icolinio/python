@@ -1,0 +1,80 @@
+#Muranova Anna
+#Zadanie 1
+
+
+def show_dict(dict):
+    print(set(dict.values()))
+
+
+mydict = {'Anna': 1, 'Basia': 2, 'Piotrek': 1, 'Pawel': 3}
+show_dict(mydict)
+
+
+#Zadanie 2
+class Polynomial:
+    def __init__(self, list):
+        self.list = list
+
+    def __add__(self, other):
+        l1 = len(self.list)
+        l2 = len(other.list)
+        l0 = []
+        for k in range(0, min(l1, l2)):
+            l0.append(self.list[k] + other.list[k])
+        if l1 < l2:
+            l0 += other.list[l2-l1+1:]
+        else:
+            l0 += self.list[l1-l2+1:]
+        return Polynomial(l0)
+
+    def __str__(self):
+        s = str(self.list[0])
+        for i in range(1, len(self.list)):
+            if self.list[i] > 0:
+                s += '+'
+                s += (str(self.list[i]) + 'x^' + str(i))
+            elif self.list[i] < 0:
+                s += (str(self.list[i]) + 'x^' + str(i))
+        return s
+
+    def get_degree(self):
+        i = len(self.list)-1
+        while self.list[i] == 0:
+            i = i-1
+        return i
+
+
+print(Polynomial([1, 2, -3, 4, 5]), '+', Polynomial([0, 5, 2]), '=', Polynomial([1, 2, -3, 4, 5]) + Polynomial([0, 5, 2]))
+print(Polynomial([1, 2, 3, -5, 0, 0, 0]).get_degree())
+
+
+#Zadanie 3
+
+def newton(n, k):
+    if k == 0 or n == k:
+        return 1
+    else:
+        return newton(n-1, k-1)+newton(n-1, k)
+
+
+print(newton(5, 3))
+
+
+#Zadanie 4
+def summa(*args, n):
+    s = 0
+    for i in args:
+        s += i**n
+    return s
+
+
+print(summa(1, 2, 3, 4, 5, n=2))
+
+
+#Zadanie 5
+str0 = 'I study at the University of Warmia and Mazury in Olsztyn'
+print(str0[-1::-4])
+
+
+#Zadanie 6
+print([x**3 for x in range(0, 31)])
