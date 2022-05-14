@@ -1,0 +1,58 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+"""""
+tab1 = {
+    'Name': ['Anna', 'Zofia', 'Sylwia', "Katarzyna", "Teresa", 'Zenon'],
+    'Age': [21, 40, 13, 31, 34, 28]
+}
+tab1 = pd.DataFrame(tab1, index=[2312, 2336, 2942, 9840, 2794, 2933])
+tab2 = {
+    'Name': ['Sylwia', 'Katarzyna', 'Teresa', "Tomasz", "Cezary", 'Zenon'],
+    'W': [64, 69, 74, 61, 66, 61],
+    'H': [151, 177, 170, 157, 151, 153],
+    'Glasses': ['F', 'T', 'F', 'T', 'F', 'T']
+}
+tab2 = pd.DataFrame(tab2, index=[2942, 9840, 2794, 8891, 8111, 2933])
+
+print(tab1)
+print(tab2)
+print(pd.merge(tab1, tab2))
+print("Alfabetycznie:")
+print(tab2.sort_values('Name'))
+print("Osoby noszące okulary:")
+grouped = tab2.groupby("Glasses").get_group('T')
+print(grouped)
+print("Osoby z przedziału wiekowego 20-30:")
+m1 = tab1.loc[(tab1['Age'] >= 20) & (tab1['Age'] <= 30)]
+print(m1)
+print("BMI: ")
+tab2['BMI'] = round((tab2.W / (tab2.H * tab2.H)) * 10000, 1)
+print(tab2)
+
+f = open('tekst1', 'r+')
+s = f.read()
+print(s)
+
+data = pd.read_csv('jajka.csv', sep=';', index_col=0, encoding="cp1250")
+data2 = data.stack()
+data3 = data2.str.replace(',', '.').astype('float')
+srednia = data3.mean()
+minCena = data3.min()
+maxCena = data3.max()
+print(data3[data3 == minCena])
+print(data3[data3 == maxCena])
+"""
+pingwiny = pd.read_csv('penguins.csv', delimiter=',', dtype=None)
+colors = np.where(pingwiny["sex"] == "MALE", 'b', 'r')
+markers = ["." , "," , "o" , "v" , "^" , "<", ">"]
+#pingwiny.plot.scatter(x='bill_length_mm', y='bill_depth_mm', c=colors, marker=markers)
+for i in range(7): #for each of the 7 features
+    mi = markers[i] #marker for ith feature
+    xi = x #x array for ith feature .. here is where you would generalize      different x for every feature
+    yi = y[i] #y array for ith feature
+    ci = colors[i] #color for ith feature
+    plt.scatter(xi,yi,marker=mi, color=ci)
+plt.show()
+
