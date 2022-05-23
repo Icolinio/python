@@ -1,0 +1,42 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import math
+df = pd.DataFrame(
+    {"Imiona": ["Anna", "Zofia", "Sylwia", "Katarzyna", "Teresa", "Tomasz", "Cezary", "Zenon", "Filip", "Adrian"],
+     "Wiek": [21, 40, 13, 31, 34, 14, 13, 28, 20, 15],
+     "Plec": ["K", "K", "K", "K", "K", "M", "M", "M", "M", "M", ],
+     "Waga": [65, 80, 64, 69, 74, 61, 66, 61, 69, 77],
+     "Wzrost": [179, 179, 151, 177, 170, 157, 151, 153, 160, 160],
+     "Okulary": ["NIE", "TAK", "NIE", "TAK", "NIE", "TAK", "NIE", "TAK", "NIE", "TAK"]},
+    index=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+okulary1 = df.query('Okulary == "TAK"')
+print(okulary1)
+okularyK = df.query('Okulary == "TAK" and Plec == "K"')
+print("Ilość kobiet z okularami: ", okularyK['Okulary'].count())
+wzrost = df.query('Okulary == "TAK" and Wzrost < 180 and Wzrost > 160')
+print("Imiona osob z wzrostem z przedzialu 160-180 oraz noszące okulary \n", wzrost['Imiona'])
+bmi = df.Waga / df.Wzrost * df.Wzrost
+df.insert(6, "BMI", bmi, True)
+print("Tabela po dodaniu BMI: ", df)
+sredniM = df.query('Okulary == "TAK" and Plec == "M"')
+sredniK = df.query('Okulary == "NIE" and Plec == "K"')
+print("Średni wiek mężczyzn posiadających okulary: ", sredniM['Wiek'].mean())
+print("Średni wiek kobiet nie posiadających okularów: ", round(sredniK['Wiek'].mean(), 1))
+e = math.e
+x = np.linspace(0, 2, 100)
+y = e ** x
+y1 = x ** 2
+plt.plot(x, y, 'blue', linestyle="-", label="e^x")
+plt.plot(x, y1, 'red', linestyle=":", label="x^2")
+plt.legend(title=' Wykres ')
+#plt.show()
+data = pd.read_csv('wyniki.csv', sep=';', index_col=0, encoding="UTF-8")
+woj1 = data.loc[:,['Liczba wyborców uprawnionych do głosowania', 'Województwo']].max()
+print('Województwo z największą liczbą wyborców uprawnionych do głosowania:', woj1['Województwo'])
+woj2 = data.query('Województwo  == "warmińsko-mazurskie"')
+woj3 = woj2.iloc[:, 23:33].max()
+woj4 = data.loc[:, ['Województwo','Andrzej Sebastian DUDA', 'Rafał Kazimierz TRZASKOWSKI']]
+print(woj4)
+woj4.plot(x='Województwo', kind='bar',  stacked=True)
+plt.show()
